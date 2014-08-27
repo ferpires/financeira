@@ -1,27 +1,29 @@
+import java.math.BigDecimal;
+
 
 public class OperacaoTipoD implements Taxa {
 
-	private Taxa t;
+	private Taxa taxa;
 
 	@Override
-	public double calculoTaxa(Agendamento a) {
-		if(a.getTipoTransferencia().equals("D")){
-			if(a.getValorTransferencia() <= 25000){
-				a.setTipoTransferencia("A");
-			}else if(a.getValorTransferencia() <= 120000){
-				a.setTipoTransferencia("B");
-			}else if(a.getValorTransferencia() > 120000){
-				a.setTipoTransferencia("C");
+	public BigDecimal calculoTaxa(Agendamento agendamento) {
+		if(agendamento.getTipoTransferencia().equals(TipoTransferencia.D)){
+			if(agendamento.getValorTransferencia().compareTo(new BigDecimal(25000)) <= 0){
+				agendamento.setTipoTransferencia(TipoTransferencia.A);
+			}else if(agendamento.getValorTransferencia().compareTo(new BigDecimal(120000)) <= 0){
+				agendamento.setTipoTransferencia(TipoTransferencia.B);
+			}else if(agendamento.getValorTransferencia().compareTo(new BigDecimal(120000)) > 0){
+				agendamento.setTipoTransferencia(TipoTransferencia.C);
 			}
-			return t.calculoTaxa(a);
+			return taxa.calculoTaxa(agendamento);
 		}else {
-			return t.calculoTaxa(a);
+			return taxa.calculoTaxa(agendamento);
 		}
 	}
 
 	@Override
-	public void setBuscaTaxaValida(Taxa t) {
-		this.t = t;
+	public void setBuscaTaxaValida(Taxa taxa) {
+		this.taxa = taxa;
 	}
 
 }

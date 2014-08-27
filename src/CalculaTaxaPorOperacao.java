@@ -1,7 +1,9 @@
+import java.math.BigDecimal;
+
 
 public class CalculaTaxaPorOperacao {
 
-	public double taxa (Agendamento a){
+	public BigDecimal taxa (Agendamento agendamento){
 		OperacaoTipoD tipoD = new OperacaoTipoD();
 		OperacaoTipoA tipoA = new OperacaoTipoA();
 		OperacaoTipoB tipoB = new OperacaoTipoB();
@@ -11,6 +13,6 @@ public class CalculaTaxaPorOperacao {
 		tipoA.setBuscaTaxaValida(tipoB);
 		tipoB.setBuscaTaxaValida(tipoC);
 		
-		return tipoD.calculoTaxa(a);
+		return tipoD.calculoTaxa(agendamento);
 	}
 }

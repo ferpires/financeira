@@ -1,7 +1,9 @@
+import java.math.BigDecimal;
+
 
 public interface Taxa {
 
-	double calculoTaxa(Agendamento a);
-	void setBuscaTaxaValida(Taxa t);
+	BigDecimal calculoTaxa(Agendamento agendamento);
+	void setBuscaTaxaValida(Taxa taxa);
 	
 }

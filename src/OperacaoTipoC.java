@@ -1,21 +1,23 @@
+import java.math.BigDecimal;
+
 
 public class OperacaoTipoC implements Taxa {
 
-	private Taxa t;
+	private Taxa taxa;
 
 	@Override
-	public double calculoTaxa(Agendamento a) {
+	public BigDecimal calculoTaxa(Agendamento agendamento) {
 		CalculaTaxaPorDataRegressiva taxaRegressiva = new CalculaTaxaPorDataRegressiva();
-		if(a.getTipoTransferencia().equals("C")){
-			return taxaRegressiva.validaData(a);
+		if(agendamento.getTipoTransferencia().equals(TipoTransferencia.C)){
+			return taxaRegressiva.validaData(agendamento);
 		}else {
-			return t.calculoTaxa(a);
+			return taxa.calculoTaxa(agendamento);
 		}
 	}
 
 	@Override
-	public void setBuscaTaxaValida(Taxa t) {
-		this.t = t;
+	public void setBuscaTaxaValida(Taxa taxa) {
+		this.taxa = taxa;
 	}
 
 }

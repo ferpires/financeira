@@ -1,23 +1,24 @@
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 
 public class AteTrintaDias implements DataAgendamento {
 
 	private Calendar dataAteTrintaDias = Calendar.getInstance();
-	private DataAgendamento d;
+	private DataAgendamento dataAgendamento;
 	
 	@Override
-	public double calculoData(Agendamento a) {
+	public BigDecimal calculoData(Agendamento agendamento) {
 		dataAteTrintaDias.add(Calendar.DAY_OF_MONTH, 30);
-		if(a.getDataAgendamento().before(dataAteTrintaDias)){
-			return a.getValorTransferencia() * 0.021;
+		if(agendamento.getDataAgendamento().before(dataAteTrintaDias)){
+			return agendamento.getValorTransferencia().multiply(new BigDecimal("0.021"));
 		}
-		return d.calculoData(a);
+		return dataAgendamento.calculoData(agendamento);
 	}
 
 	@Override
-	public void setBuscaDataValida(DataAgendamento d) {
-		this.d = d;
+	public void setBuscaDataValida(DataAgendamento dataAgendamento) {
+		this.dataAgendamento = dataAgendamento;
 	}
 
 	

@@ -1,28 +1,29 @@
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 
 public class OperacaoTipoB implements Taxa{
 
-	private Taxa t;
+	private Taxa taxa;
 	private Calendar dataTrintaDias = Calendar.getInstance();
-	private double taxa;
+	private BigDecimal taxaFinal;
 
-	public double calculoTaxa (Agendamento a){
-		if(a.getTipoTransferencia().equals("B")){
+	public BigDecimal calculoTaxa (Agendamento a){
+		if(a.getTipoTransferencia().equals(TipoTransferencia.B)){
 			dataTrintaDias.add(Calendar.DAY_OF_MONTH, 30);
 			if(a.getDataAgendamento().before(dataTrintaDias)){
-				taxa = 10;
+				taxaFinal = new BigDecimal("10");
 			} else {
-				taxa = 8;
+				taxaFinal = new BigDecimal("8");
 			}
-			return taxa;
+			return taxaFinal;
 		}
-		return t.calculoTaxa(a);
+		return taxa.calculoTaxa(a);
 	}
 
 	@Override
-	public void setBuscaTaxaValida(Taxa t) {
-		this.t = t;
+	public void setBuscaTaxaValida(Taxa taxa) {
+		this.taxa = taxa;
 	}
 
 }

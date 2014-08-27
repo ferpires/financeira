@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 
@@ -5,11 +6,11 @@ public class Agendamento {
 
 	private String contaOrigem;
 	private String contaDestino;
-	private double valorTransferencia;
+	private BigDecimal valorTransferencia;
 	private Calendar dataAgendamento;
-	private String tipoTransferencia;
+	private TipoTransferencia tipoTransferencia;
 	
-	public Agendamento (double valorTransferencia, Calendar dataAgendamento, String tipoTransferencia){
+	public Agendamento (BigDecimal valorTransferencia, Calendar dataAgendamento, TipoTransferencia tipoTransferencia){
 		this.valorTransferencia = valorTransferencia;
 		this.dataAgendamento = dataAgendamento;
 		this.tipoTransferencia = tipoTransferencia;
@@ -31,7 +32,7 @@ public class Agendamento {
 		this.contaDestino = contaDestino;
 	}
 
-	public double getValorTransferencia() {
+	public BigDecimal getValorTransferencia() {
 		return valorTransferencia;
 	}
 	
@@ -39,15 +40,15 @@ public class Agendamento {
 		return dataAgendamento;
 	}
 
-	public String getTipoTransferencia() {
+	public TipoTransferencia getTipoTransferencia() {
 		return tipoTransferencia;
 	}
 
-	public void setTipoTransferencia(String tipoTransferencia) {
+	public void setTipoTransferencia(TipoTransferencia tipoTransferencia) {
 		this.tipoTransferencia = tipoTransferencia;
 	}
 	
-	public double calculaValorTotalTransacao(Agendamento a, CalculaTaxaPorOperacao c) {
-		return a.getValorTransferencia() + c.taxa(a);
+	public BigDecimal calculaValorTotalTransacao(Agendamento agendamento, CalculaTaxaPorOperacao calculaTaxaPorOperacao) {
+		return agendamento.getValorTransferencia().add(calculaTaxaPorOperacao.taxa(agendamento));
 	}
 }

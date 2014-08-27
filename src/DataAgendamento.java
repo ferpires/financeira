@@ -1,6 +1,8 @@
+import java.math.BigDecimal;
+
 
 public interface DataAgendamento {
 
-	double calculoData(Agendamento a);
-	void setBuscaDataValida(DataAgendamento d);
+	BigDecimal calculoData(Agendamento agendamento);
+	void setBuscaDataValida(DataAgendamento dataAgendamento);
 }

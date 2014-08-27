@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,23 +13,23 @@ public class OperacaoTipoATest {
 	
 	@Test
 	public void testTipoA100Reais() {
-		Agendamento c1 = new Agendamento(100, data, "A");
-		double valorC1 = calculaTaxa.taxa(c1);
-		Assert.assertEquals(5, valorC1, 0.00001);
+		Agendamento agendamento = new Agendamento(new BigDecimal("100"), data, TipoTransferencia.A);
+		BigDecimal valorTaxa = calculaTaxa.taxa(agendamento);
+		Assert.assertTrue(valorTaxa.compareTo(new BigDecimal("5")) == 0);
 	}
 	
 	@Test
 	public void testTipoA200Reais() {
-		Agendamento c1 = new Agendamento(200, data, "A");
-		double valorC1 = calculaTaxa.taxa(c1);
-		Assert.assertEquals(8, valorC1, 0.00001);
+		Agendamento agendamento = new Agendamento(new BigDecimal("200"), data, TipoTransferencia.A);
+		BigDecimal valorTaxa = calculaTaxa.taxa(agendamento);
+		Assert.assertTrue(valorTaxa.compareTo(new BigDecimal("8")) == 0);
 	}
 
 	@Test
 	public void testTipoA1600Reais() {
-		Agendamento c1 = new Agendamento(1600, data, "A");
-		double valorC1 = calculaTaxa.taxa(c1);
-		Assert.assertEquals(50, valorC1, 0.00001);
+		Agendamento agendamento = new Agendamento(new BigDecimal("1600"), data, TipoTransferencia.A);
+		BigDecimal valorTaxa = calculaTaxa.taxa(agendamento);
+		Assert.assertTrue(valorTaxa.compareTo(new BigDecimal("50")) == 0);
 	}
 	
 }

@@ -1,4 +1,5 @@
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -13,50 +14,51 @@ public class AgendamentoTest {
 	
 	@Test
 	public void novoAgendamentoTipoA() {
-		Agendamento a = new Agendamento(100, Calendar.getInstance(), "A");
-		double valor = calculaTaxa.taxa(a);
-		Assert.assertEquals(5, valor, 0.00001);
+		Agendamento agendamento = new Agendamento(new BigDecimal("100"), Calendar.getInstance(), TipoTransferencia.A);
+		BigDecimal valorTaxa = calculaTaxa.taxa(agendamento);
+		Assert.assertTrue(valorTaxa.compareTo(new BigDecimal("5")) == 0);
 	}
 	
 	@Test
 	public void AgendamentoTipoBAteTrintaDias() {
-		Agendamento a = new Agendamento(100, new GregorianCalendar(2014, 6, 24), "B");
-		double valor = calculaTaxa.taxa(a);
-		Assert.assertEquals(10, valor, 0.00001);
+		data.add(GregorianCalendar.DAY_OF_MONTH, 20);
+		Agendamento agendamento = new Agendamento(new BigDecimal("100"), data, TipoTransferencia.B);
+		BigDecimal valorTaxa = calculaTaxa.taxa(agendamento);
+		Assert.assertTrue(valorTaxa.compareTo(new BigDecimal("10")) == 0);
 	}
 	
 	@Test
 	public void testTipoAValorTotalTransacao() {
-		Agendamento c1 = new Agendamento(1600, data, "A");
-		Assert.assertEquals(1650, c1.calculaValorTotalTransacao(c1, calculaTaxa), 0.00001);
+		Agendamento agendamento = new Agendamento(new BigDecimal("1600"), data, TipoTransferencia.A);
+		Assert.assertTrue(agendamento.calculaValorTotalTransacao(agendamento, calculaTaxa).compareTo(new BigDecimal("1650")) == 0);
 	}
 	
 	@Test
 	public void testTipoBValorTotalAte30Dias() {
 		data.add(GregorianCalendar.DAY_OF_MONTH, 20);
-		Agendamento c1 = new Agendamento(100, data, "B");
-		Assert.assertEquals(110, c1.calculaValorTotalTransacao(c1, calculaTaxa), 0.00001);
+		Agendamento agendamento = new Agendamento(new BigDecimal("100"), data, TipoTransferencia.B);
+		Assert.assertTrue(agendamento.calculaValorTotalTransacao(agendamento, calculaTaxa).compareTo(new BigDecimal("110")) == 0);
 	}
 	
 	@Test
 	public void testTipoBValorTotalApos30Dias() {
 		data.add(GregorianCalendar.DAY_OF_MONTH, 40);
-		Agendamento c1 = new Agendamento(100, data, "B");
-		Assert.assertEquals(108, c1.calculaValorTotalTransacao(c1, calculaTaxa), 0.00001);
+		Agendamento agendamento = new Agendamento(new BigDecimal("100"), data, TipoTransferencia.B);
+		Assert.assertTrue(agendamento.calculaValorTotalTransacao(agendamento, calculaTaxa).compareTo(new BigDecimal("108")) == 0);
 	}
 	
 	@Test
 	public void testTipoCValorTotalApos30Dias() {
 		data.add(GregorianCalendar.DAY_OF_MONTH, 40);
-		Agendamento c1 = new Agendamento(100, data, "C");
-		Assert.assertEquals(101.2, c1.calculaValorTotalTransacao(c1, calculaTaxa), 0.00001);
+		Agendamento agendamento = new Agendamento(new BigDecimal("100"), data, TipoTransferencia.C);
+		Assert.assertTrue(agendamento.calculaValorTotalTransacao(agendamento, calculaTaxa).compareTo(new BigDecimal("101.2")) == 0);
 	}
 	
 	@Test
 	public void testTipoCValorTotalAte5Dias() {
 		data.add(GregorianCalendar.DAY_OF_MONTH, 4);
-		Agendamento c1 = new Agendamento(100, data, "C");
-		Assert.assertEquals(108.3, c1.calculaValorTotalTransacao(c1, calculaTaxa), 0.00001);
+		Agendamento agendamento = new Agendamento(new BigDecimal("100"), data, TipoTransferencia.C);
+		Assert.assertTrue(agendamento.calculaValorTotalTransacao(agendamento, calculaTaxa).compareTo(new BigDecimal("108.3")) == 0);
 	}
 
 }

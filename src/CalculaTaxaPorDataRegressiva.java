@@ -1,7 +1,9 @@
+import java.math.BigDecimal;
+
 
 public class CalculaTaxaPorDataRegressiva {
 	
-	public double validaData(Agendamento a){
+	public BigDecimal validaData(Agendamento agendamento){
 		
 		MaiorQueTrintaDias maiorQueTrintaDias = new MaiorQueTrintaDias();
 		AteCincoDias ateCincoDias = new AteCincoDias();
@@ -18,6 +20,6 @@ public class CalculaTaxaPorDataRegressiva {
 		ateVinteDias.setBuscaDataValida(ateVinteECincoDias);
 		ateVinteECincoDias.setBuscaDataValida(ateTrintaDias);
 		
-		return maiorQueTrintaDias.calculoData(a);
+		return maiorQueTrintaDias.calculoData(agendamento);
 	}
 }
